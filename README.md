@@ -22,28 +22,70 @@ The repo contains HTML and JS files along with a couple sample sound files. Sinc
 
 ## Editing the code 
 
-This project is setup to run from `index.html`. The main program is in `main.js`. The rendering process that vidsualizes the audio is broken up into separate modules. 
+This project is setup to run from `index.html`. The main program is in `main.js`. The rendering process that vidsualizes the audio is broken up into separate modules. I've included a few sample renderers. You goal is to make your own renderer. 
 
-Each rendering module is a function that takes the frequency array and canvas context as a arguments. Sometimes there are other arguments if needed. Take a look at the comments in each of these files for notes. 
+Each rendering module is a function that takes the frequency array and canvas context as arguments. Sometimes there are other arguments if needed. Take a look at the comments in each of these files for notes. 
 
-**Challenge 1** follow the tutorial and notes from lesson. Get the base visualizer working. Use the sample code here: 
+**Challenge 1** Follow the tutorial and notes from lesson. Get the base visualizer working. Test out the sample code by running it in your browser. 
 
-https://github.com/Make-School-Labs/FEW-2-5-Data-Visualization-Real-Ttime-Data
+Try this: 
 
-**Challenge 2** modify the HTML and CSS that presents the visualizer. Design the page. 
+- Open the visualization in your browser. You'll need to use a local server. Live Server plug in for VSCode is a good choice. 
+- Press the play, button listen to the audio and watch the visualization. Notice the red lines draw out from the circle in the center. The lines start at 3:00. This is the lowest frequency. As frquencies get higher the lines are drawn outward from angles clockwise around the circle. 
 
-**Challenge 3** modify the drawing code of the visualizer. With this challenge your goal is to make a drawing of frequencies something unique and different from what is in the original tutorial. 
+The length of the lines is determined by the audio frquency data. The position around the circle or angle of the line is determined by the index of the value. 
 
-This challenge is open ended you can appy yourself to any area that interests you and meets your ability level. By the end of the assignment you should have a audio visualizer that looks different from the examples. Be sure to change at least the following things: 
+**Challenge 2** Modify the HTML and CSS that presents the visualizer. Design the page.
 
-- color of the lines or fills
-- geometry of the lines and fills
-- line width
+Try this: Change the size of the canvas. Find the cavas tag and change the `width` and `height` values. 
+
+The circle isn't centered because the code draws based on the 300 value. This will need to be adjusted in the code. 
+
+Change the CSS at the top of the page. You can adjust the style of the buttons, the background of the body, or the border on the canvas. Everything that is drawn on the canvas needs to be adjusted in the JS code. 
+
+**Challenge 3** Try some of the demo visualizers. Open `main.js` find the `render()` function at the bottom of the page. This draws the audio data to the canvas. 
+
+At the top it defines the `centerX` and `centerY`. 
+
+Try this: Adjust the centerX and centerY values to match what you used when you changed the canvas size. 
+
+The canvas may not be clearing the drawing since the renderer is not aware that you changed the size ofg the canvas. 
+
+Find: `analyser.getByteFrequencyData(frequencyArray)`. This line gets the array of audio data. The code here passes this array to one of the renderer functions below. 
+
+Try this: There is a list of renderers that have been commented here. Comment and uncomment each to test it out. 
+
+Notice each of these rendering functions takes `frequencyArray` as the first parameter and `ctx` (canvas context) as the second parameter. 
+
+Uncomment `circleGridRenderer(frequencyArray, ctx, 300, 300)`. The last two parameters here `300` set the width, and height for the drawing. Change these to size of the canvas you used. 
+
+The `circleGridRenderer` render draws the frequency data as a grid of circles. Using the index and frequency value for: 
+
+- index - determines the color low frequencies are red. As the colors get higher in frequency tthey move around the color wheel
+- index - determines position of each circle. Low frequency starts in the upper left. High frqeuncies move to the lower right. 
+- value - the value of each frequency determines the size of the circles drawn at each position on the grid.
+
+**Challenge 4** Open `renderCircleGrid.js` take a look at the code. 
+
+The first three lines here erase the previous drawing by filling the canvas with transparent color. Change the first line to: `ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'`. This should fill with black. 
+
+play with the values here. Especially the last number which is the transparency of the color. 
+
+Read through the other comments here. 
+
+Try this: Change the radius of the small circles. Currently each frequency value is rendered as a small circle on a grid. Each of these circles is 0 to 30 pixels in radius.
+
+**Challenge 5** Make your own renderer! This is a big challenge is the core of this assignment. This assignment is open ended. Try any or all of the challenges below: 
+
+- Refactor one of the existing renderers. These could use some improvement especially in how they handle parameters. 
+	- improve parameters by using an object to pass the parameters. 
+	- add new parameters, such as the height and width or colors that a renderer might use. 
+- Make your own renderer! 
 
 ### Submission and Due Date 
 
 - Due Feb. 17 
-- Submit your GitHub Project on GradeScope. 
+- Submit your GitHub Project on [GradeScope](https://www.gradescope.com/courses/218919). 
 
 ## Evaluate your progress
 
