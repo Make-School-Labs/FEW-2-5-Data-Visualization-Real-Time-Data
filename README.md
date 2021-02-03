@@ -84,7 +84,7 @@ Try this: Change the radius of the small circles. Currently each frequency value
 
 ### Submission and Due Date 
 
-- Due Feb. 17 
+- Due Feb. 15
 - Submit your GitHub Project on [GradeScope](https://www.gradescope.com/courses/218919). 
 
 ## Evaluate your progress
